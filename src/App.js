@@ -19,25 +19,24 @@ class App extends Component {
     friends,
     newScore: 0,
     TopScore: 0,
-    clicked: [
-
-    ]
+    clicked: []
   };
 
   handleIncrement = () => {
-    const newScore = this.state.actualScore + 1;
+    const score = this.state.newScore + 1;
     this.setState({
-      actualScore: newScore
+      newScore: score
     });
     
-    console.log(newScore);
+    console.log(score);
     
-    if (newScore >= this.state.topScore) {
-      this.setState({ topScore: newScore 
+    if (this.state.newScore >= this.state.TopScore) {
+      this.setState({ TopScore: score 
       });
     }
-    else if (newScore === 12) {
+    else if  (this.state.newScore === 2) {
       alert("You win!");
+      console.log("This is what i want to see" + this.state.newScore)
     }
     this.handlePosition();
   };
@@ -49,9 +48,9 @@ class App extends Component {
 
   handleReset = () => {
     this.setState({
-      actualScore: 0,
-      topScore: this.state.topScore,
-      clicked: false
+      newScore: 0,
+      TopScore: this.state.TopScore,
+      clicked: []
     });
     this.handlePosition();
   };
@@ -64,6 +63,7 @@ class App extends Component {
       console.log(this.state.clicked);
       this.setState({ clicked: this.state.clicked });
     } else {
+      alert("You lost!!")
       this.handleReset();
     }
   };
@@ -72,8 +72,8 @@ class App extends Component {
     return (
       <Wrapper>
         <NavBar
-          score={this.state.newScore}
-          topScore={this.state.topScore}
+          newScore={this.state.newScore}
+          TopScore={this.state.TopScore}
         />
         <Jumbotron />
         <Container>
